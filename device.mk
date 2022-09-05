@@ -28,7 +28,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 LOCAL_PATH := device/xiaomi/nabu
 
-include kernel/xiaomi/nabu/Android.mk
+#include kernel/xiaomi/nabu/Android.mk
 
 # API
 PRODUCT_SHIPPING_API_LEVEL := 30
@@ -60,7 +60,7 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Screen
-TARGET_SCREEN_HEIGHT := 640
+TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1600
 
 # Soong namespaces
@@ -79,10 +79,8 @@ PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
 # TWRP Configuration
-TW_THEME := landscape_hdpi
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1600
-RECOVERY_SDCARD_ON_DATA := true
+#TW_ROTATION := 90
+TW_THEME := portrait_hdpi
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXTRA_LANGUAGES := true
@@ -90,13 +88,15 @@ TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_REPACKTOOLS := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
+#TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
 TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
+TW_SCREEN_BLANK_ON_BOOT := true
 TW_EXCLUDE_APEX := true
+#BOARD_HAS_FLIPPED_SCREEN := true
 
 # Crypto
 TW_INCLUDE_CRYPTO := true
@@ -112,16 +112,10 @@ BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 TARGET_RECOVERY_DEVICE_MODULES += \
     libandroidicu \
-    libion \
-	libdisplayconfig.qti \
-    vendor.display.config@1.0 \
-    vendor.display.config@2.0
+    libion
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
-    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
-    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/libdisplayconfig.qti.so \
-    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@1.0.so \
-    $(TARGET_OUT_SYSTEM_EXT_SHARED_LIBRARIES)/vendor.display.config@2.0.so
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so
 
 #PRODUCT_COPY_FILES += \
 #    $(OUT_DIR)/target/product/nabu/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
